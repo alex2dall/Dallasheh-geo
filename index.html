@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>דלאשה מערכות הנדסה</title>
+
+<style>
+:root{
+  --primary:#1e3a8a;
+  --primary2:#312e81;
+  --accent:#2563eb;
+  --bg:#eef4ff;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#64748b;
+  --border:#dbe3ef;
+  --success:#16a34a;
+  --success-bg:#dcfce7;
+  --danger:#dc2626;
+  --danger-bg:#fee2e2;
+  --warning:#f97316;
+  --warning-bg:#ffedd5;
+  --shadow:0 10px 28px rgba(15,23,42,.12);
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:linear-gradient(180deg,#eaf1ff,#ffffff);
+  color:var(--text);
+}
+
+.app{
+  max-width:560px;
+  min-height:100vh;
+  margin:0 auto;
+  background:var(--bg);
+  position:relative;
+  padding-bottom:104px;
+  overflow-x:hidden;
+}
+
+.header{
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:#fff;
+  padding:18px 16px 20px;
+  border-radius:0 0 26px 26px;
+  box-shadow:0 8px 24px rgba(30,58,138,.25);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.logo{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#fff;
+  color:var(--primary);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  box-shadow:0 6px 18px rgba(0,0,0,.18);
+}
+
+.header h1{
+  margin:0;
+  font-size:22px;
+  text-align:center;
+  flex:1;
+}
+
+.header .credit{
+  margin:8px 0 0;
+  text-align:center;
+  font-size:12px;
+  opacity:.92;
+}
+
+.screen{
+  display:none;
+  padding:16px;
+}
+
+.screen.active{
+  display:block;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:var(--shadow);
+  margin-bottom:14px;
+}
+
+h2,h3{
+  margin:0 0 12px;
+}
+
+p{
+  line-height:1.65;
+}
+
+.small{
+  font-size:13px;
+  color:var(--muted);
+}
+
+label{
+  display:block;
+  margin:12px 0 7px;
+  font-weight:800;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  font-size:16px;
+  outline:none;
+  background:#fff;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+textarea{
+  min-height:78px;
+  resize:vertical;
+}
+
+input:focus,select:focus,textarea:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(37,99,235,.12);
+}
+
+button{
+  width:100%;
+  border:none;
+  border-radius:17px;
+  padding:14px 12px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  margin-top:10px;
+  transition:.15s ease;
+  touch-action:manipulation;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+
+.btn-secondary{
+  background:#e0e7ff;
+  color:var(--primary);
+}
+
+.btn-success{
+  background:var(--success);
+  color:#fff;
+}
+
+.btn-danger{
+  background:var(--danger);
+  color:#fff;
+}
+
+.btn-warning{
+  background:var(--warning);
+  color:#fff;
+}
+
+.btn-light{
+  background:#f1f5f9;
+  color:#0f172a;
+  border:1px solid var(--border);
+}
+
+.two-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.three-cols{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.lesson-box{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:14px;
+  margin:10px 0;
+}
+
+.lesson-box b{
+  color:var(--primary);
+}
+
+.status-row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+.progress-wrap{
+  width:100%;
+  height:13px;
+  background:#e5e7eb;
+  border-radius:50px;
+  overflow:hidden;
+  margin:10px 0 16px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--primary2));
+  border-radius:50px;
+}
+
+.question-box{
+  min-height:390px;
+}
+
+.question-title{
+  font-size:21px;
+  line-height:1.55;
+  font-weight:900;
+  margin:12px 0 14px;
+}
+
+.choice{
+  background:#fff;
+  color:var(--text);
+  border:2px solid var(--border);
+  text-align:right;
+  font-weight:700;
+  line-height:1.5;
+  margin:8px 0;
+}
+
+.choice.correct{
+  border-color:var(--success);
+  background:var(--success-bg);
+  color:#14532d;
+}
+
+.choice.wrong{
+  border-color:var(--danger);
+  background:var(--danger-bg);
+  color:#7f1d1d;
+}
+
+.choice.locked{
+  pointer-events:none;
+}
+
+.feedback{
+  display:none;
+  padding:14px;
+  border-radius:18px;
+  line-height:1.7;
+  margin-top:14px;
+  font-weight:700;
+}
+
+.feedback.show{
+  display:block;
+}
+
+.feedback.good{
+  background:var(--success-bg);
+  border:1px solid #86efac;
+  color:#14532d;
+}
+
+.feedback.bad{
+  background:var(--danger-bg);
+  border:1px solid #fca5a5;
+  color:#7f1d1d;
+}
+
+.hint-box{
+  display:none;
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  color:#1e3a8a;
+  padding:12px;
+  border-radius:16px;
+  line-height:1.6;
+  margin-top:10px;
+  font-weight:700;
+}
+
+.hint-box.show{
+  display:block;
+}
+
+.formula-box{
+  background:#f8fafc;
+  border:1px dashed #94a3b8;
+  padding:12px;
+  border-radius:16px;
+  color:#334155;
+  margin-top:10px;
+  font-weight:800;
+  text-align:center;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:12px;
+}
+
+.stat-box{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:15px 10px;
+  text-align:center;
+}
+
+.stat-box b{
+  display:block;
+  font-size:25px;
+  color:var(--primary);
+  margin-bottom:4px;
+}
+
+.category-item{
+  margin:14px 0;
+}
+
+.category-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:900;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:34px;
+  padding:5px 9px;
+  border-radius:50px;
+  font-size:12px;
+  background:#e0e7ff;
+  color:var(--primary);
+  font-weight:900;
+}
+
+.alert{
+  background:var(--warning-bg);
+  border:1px solid #fdba74;
+  color:#7c2d12;
+  padding:13px;
+  border-radius:16px;
+  line-height:1.6;
+  font-weight:700;
+}
+
+.report-line{
+  border-bottom:1px solid var(--border);
+  padding:10px 0;
+  line-height:1.6;
+}
+
+.report-line b{
+  color:var(--primary);
+}
+
+.certificate{
+  border:2px solid var(--primary);
+  border-radius:24px;
+  padding:24px;
+  text-align:center;
+  background:linear-gradient(180deg,#ffffff,#eef4ff);
+}
+
+.certificate h2{
+  color:var(--primary);
+  font-size:29px;
+}
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:560px;
+  background:#ffffff;
+  border-top:1px solid var(--border);
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:5px;
+  padding:8px 8px calc(8px + env(safe-area-inset-bottom));
+  z-index:30;
+  box-shadow:0 -8px 20px rgba(15,23,42,.08);
+}
+
+.bottom-nav button{
+  margin:0;
+  padding:9px 3px;
+  border-radius:14px;
+  font-size:11px;
+  background:#eef2ff;
+  color:var(--primary);
+}
+
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.45);
+  z-index:50;
+}
+
+.overlay.show{
+  display:block;
+}
+
+.sidebar{
+  position:fixed;
+  top:0;
+  right:-340px;
+  width:320px;
+  max-width:88vw;
+  height:100vh;
+  background:#fff;
+  z-index:60;
+  padding:16px;
+  box-shadow:-12px 0 30px rgba(15,23,42,.25);
+  transition:.22s ease;
+  overflow:auto;
+}
+
+.sidebar.open{
+  right:0;
+}
+
+.qnav{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin-top:12px;
+}
+
+.qnav button{
+  margin:0;
+  padding:11px 4px;
+  font-size:14px;
+  background:#f1f5f9;
+  color:#111827;
+  border:1px solid var(--border);
+}
+
+.qnav button.current{
+  background:var(--primary);
+  color:#fff;
+}
+
+.qnav button.done{
+  background:var(--success-bg);
+  color:#166534;
+}
+
+.qnav button.bad{
+  background:var(--danger-bg);
+  color:#991b1b;
+}
+
+.qnav button.empty{
+  background:#f8fafc;
+  color:#64748b;
+}
+
+.section-label{
+  margin:16px 0 8px;
+  font-weight:900;
+  color:var(--primary);
+}
+
+.manage-list{
+  max-height:300px;
+  overflow:auto;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:8px;
+  background:#f8fafc;
+}
+
+.manage-item{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:10px;
+  margin:8px 0;
+}
+
+.manage-item b{
+  color:var(--primary);
+}
+
+.footer-credit{
+  text-align:center;
+  font-size:12px;
+  color:var(--muted);
+  padding:8px 16px 24px;
+}
+
+@media print{
+  body{
+    background:#fff;
+  }
+  .header,.bottom-nav,.no-print,.sidebar,.overlay{
+    display:none!important;
+  }
+  .app{
+    max-width:100%;
+    background:#fff;
+    padding:0;
+  }
+  .screen{
+    display:none!important;
+  }
+  #certificateScreen.active,
+  #teacherReportScreen.active{
+    display:block!important;
+  }
+  .card{
+    box-shadow:none;
+    border:none;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header class="header">
+  <div class="header-top">
+    <div class="logo">DS</div>
+    <h1>דלאשה מערכות הנדסה</h1>
+    <div class="logo">📐</div>
+  </div>
+  <div class="credit">למידה, תרגול והערכה בנושא תיבה וקובייה | עלי דלאשה 2026 ©</div>
+</header>
+
+<section id="loginScreen" class="screen active">
+  <div class="card">
+    <h2>כניסה לאפליקציה</h2>
+    <p class="small">מומלץ להתחיל במסך החומר הלימודי, לרענן מושגים, ואז לעבור לתרגול או למבחן.</p>
+
+    <label for="studentName">שם מלא</label>
+    <input id="studentName" type="text" placeholder="לדוגמה: מוחמד אבו חאמד">
+
+    <label for="studentClass">כיתה</label>
+    <input id="studentClass" type="text" placeholder="לדוגמה: ה׳ 2">
+
+    <label for="activityMode">מצב פעילות</label>
+    <select id="activityMode">
+      <option value="practice">מצב תרגול | רמזים ומשוב מיידי</option>
+      <option value="test">מצב מבחן | הערכה מסודרת</option>
+    </select>
+
+    <button class="btn-secondary" onclick="showLearning()">עבור לחומר לימודי</button>
+    <button class="btn-primary" onclick="startApp()">התחל פעילות</button>
+    <button class="btn-warning" onclick="teacherPreview()">תצוגה מקדימה למורה</button>
+    <button class="btn-light" onclick="showAbout()">אודות האפליקציה והמפתח</button>
+  </div>
+</section>
+
+<section id="learningScreen" class="screen">
+  <div class="card">
+    <h2>חומר לימודי ממוקד</h2>
+    <p class="small">עיין בחומר, רענן מושגים מרכזיים, ולאחר מכן עבור לתרגול או למבחן.</p>
+
+    <div class="lesson-box">
+      <b>מהי תיבה?</b>
+      <p>תיבה היא גוף תלת ממדי הדומה לקופסה. יש לה שש פאות, שמונה קודקודים ושנים עשר מקצועות. בדרך כלל פאות התיבה הן מלבנים, וכל זוג פאות נגדיות שווה וחופף.</p>
+    </div>
+
+    <div class="lesson-box">
+      <b>מהי קובייה?</b>
+      <p>קובייה היא מקרה מיוחד של תיבה. בקובייה כל הפאות הן ריבועים, וכל המקצועות שווים באורכם. לכן האורך, הרוחב והגובה שווים.</p>
+    </div>
+
+    <div class="lesson-box">
+      <b>פאה, מקצוע וקודקוד</b>
+      <p>פאה היא משטח שטוח של הגוף. מקצוע הוא קו שבו שתי פאות נפגשות. קודקוד הוא נקודת מפגש של מקצועות.</p>
+    </div>
+
+    <div class="lesson-box">
+      <b>נפח</b>
+      <p>נפח מתאר כמה מקום הגוף תופס במרחב. בתיבה מחשבים נפח באמצעות שלוש המידות: אורך, רוחב וגובה.</p>
+      <div class="formula-box">נפח תיבה = אורך × רוחב × גובה</div>
+    </div>
+
+    <div class="lesson-box">
+      <b>שטח פנים</b>
+      <p>שטח פנים מתאר את שטח כל המעטפת החיצונית של הגוף. בקובייה כל הפאות שוות, ולכן מחשבים שטח פאה אחת ומכפילים במספר הפאות.</p>
+      <div class="formula-box">שטח פנים של קובייה = 6 × צלע × צלע</div>
+    </div>
+
+    <button class="btn-success" onclick="setModeAndStart('practice')">התחל תרגול</button>
+    <button class="btn-primary" onclick="setModeAndStart('test')">התחל מבחן</button>
+    <button class="btn-light" onclick="showScreen('loginScreen')">חזרה למסך הראשי</button>
+  </div>
+</section>
+
+<section id="quizScreen" class="screen">
+  <div class="card question-box">
+    <div class="status-row">
+      <span id="studentMini">תלמיד</span>
+      <span id="modeMini">מצב</span>
+    </div>
+
+    <div class="status-row">
+      <span id="questionMeta"></span>
+      <span id="answeredMeta"></span>
+    </div>
+
+    <div class="progress-wrap">
+      <div id="mainProgress" class="progress-bar"></div>
+    </div>
+
+    <div id="questionTitle" class="question-title"></div>
+    <div id="choicesBox"></div>
+
+    <button id="hintBtn" class="btn-light" onclick="showHint()">הצג רמז</button>
+    <div id="hintBox" class="hint-box"></div>
+
+    <div id="feedbackBox" class="feedback"></div>
+    <div id="formulaBox" class="formula-box"></div>
+
+    <div class="two-cols no-print">
+      <button class="btn-secondary" onclick="prevQuestion()">הקודם</button>
+      <button class="btn-primary" onclick="nextQuestion()">הבא</button>
+    </div>
+  </div>
+</section>
+
+<section id="dashboardScreen" class="screen">
+  <div class="card">
+    <h2>דשבורד ניתוח תוצאות</h2>
+    <p id="studentInfo" class="small"></p>
+
+    <div class="stat-grid">
+      <div class="stat-box"><b id="scorePercent">0%</b>ציון כללי</div>
+      <div class="stat-box"><b id="correctCount">0</b>תשובות נכונות</div>
+      <div class="stat-box"><b id="wrongCount">0</b>טעויות</div>
+      <div class="stat-box"><b id="answeredCount">0</b>שאלות שנענו</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>הצלחה לפי שלב</h3>
+    <div id="categoryAnalysis"></div>
+  </div>
+
+  <div class="card">
+    <h3>תובנות מומחה</h3>
+    <p id="expertInsight"></p>
+    <div id="weakAreaBox" class="alert"></div>
+
+    <button class="btn-warning" onclick="startCorrection()">תיקון טעויות בלבד</button>
+    <button class="btn-primary" onclick="showTeacherReport()">דוח מורה</button>
+    <button class="btn-secondary" onclick="exportCSV()">ייצוא CSV</button>
+    <button class="btn-primary" onclick="showCertificate()">הצג תעודת סיום</button>
+    <button class="btn-danger" onclick="resetAll()">איפוס מלא</button>
+  </div>
+</section>
+
+<section id="teacherReportScreen" class="screen">
+  <div class="card">
+    <h2>דוח מורה</h2>
+    <div id="teacherReport"></div>
+    <button class="btn-secondary no-print" onclick="exportCSV()">ייצוא CSV</button>
+    <button class="btn-primary no-print" onclick="window.print()">הדפס דוח</button>
+    <button class="btn-light no-print" onclick="showDashboard()">חזרה לדשבורד</button>
+  </div>
+</section>
+
+<section id="certificateScreen" class="screen">
+  <div class="card">
+    <div class="certificate">
+      <h2>תעודת סיום</h2>
+      <p>מוענקת לתלמיד/ה</p>
+      <h3 id="certName"></h3>
+      <p id="certClass"></p>
+      <p>על השתתפות והשלמת פעילות</p>
+      <h3>דלאשה מערכות הנדסה</h3>
+      <p id="certScore"></p>
+      <p id="certLevel"></p>
+      <p id="certMessage"></p>
+      <p id="certDate" class="small"></p>
+      <p class="small">עלי דלאשה 2026 © | Dallasha Engineering Systems</p>
+    </div>
+    <button class="btn-primary no-print" onclick="window.print()">הדפס תעודה</button>
+    <button class="btn-secondary no-print" onclick="showDashboard()">חזרה לדשבורד</button>
+  </div>
+</section>
+
+<section id="manageScreen" class="screen">
+  <div class="card">
+    <h2>ניהול שאלות ושלבים</h2>
+    <p class="small">מסך זה מיועד למורה. ניתן להוסיף, לערוך ולמחוק שאלות ושלבים. השינויים נשמרים בדפדפן המקומי.</p>
+
+    <label>בחירת שאלה לעריכה</label>
+    <select id="editQuestionSelect" onchange="loadQuestionToForm()"></select>
+
+    <label>שלב</label>
+    <select id="questionCategory"></select>
+
+    <label>שאלה</label>
+    <textarea id="manageQuestionText" placeholder="הקלד שאלה"></textarea>
+
+    <label>תשובה 1</label>
+    <input id="choice0" type="text">
+
+    <label>תשובה 2</label>
+    <input id="choice1" type="text">
+
+    <label>תשובה 3</label>
+    <input id="choice2" type="text">
+
+    <label>תשובה 4</label>
+    <input id="choice3" type="text">
+
+    <label>מספר תשובה נכונה</label>
+    <select id="correctAnswer">
+      <option value="0">תשובה 1</option>
+      <option value="1">תשובה 2</option>
+      <option value="2">תשובה 3</option>
+      <option value="3">תשובה 4</option>
+    </select>
+
+    <label>רמז מכוון בלבד</label>
+    <textarea id="questionHint" placeholder="כתוב רמז שמכוון לחשיבה ולא מגלה תשובה"></textarea>
+
+    <label>הסבר מומחה</label>
+    <textarea id="questionExplain" placeholder="הסבר לאחר מענה"></textarea>
+
+    <label>נוסחה או כלל קצר</label>
+    <input id="questionFormula" type="text">
+
+    <button class="btn-success" onclick="addQuestion()">הוסף כשאלה חדשה</button>
+    <button class="btn-primary" onclick="updateQuestion()">שמור עריכת שאלה</button>
+    <button class="btn-danger" onclick="deleteQuestion()">מחק שאלה נבחרת</button>
+  </div>
+
+  <div class="card">
+    <h3>ניהול שלבים</h3>
+    <label>שם שלב חדש או מעודכן</label>
+    <input id="stageName" type="text" placeholder="לדוגמה: מדידות מתקדמות">
+
+    <label>בחירת שלב קיים</label>
+    <select id="stageSelect"></select>
+
+    <button class="btn-success" onclick="addStage()">הוסף שלב</button>
+    <button class="btn-primary" onclick="renameStage()">שנה שם שלב</button>
+    <button class="btn-danger" onclick="deleteStage()">מחק שלב</button>
+    <button class="btn-warning" onclick="resetQuestionBank()">איפוס מאגר ברירת מחדל</button>
+  </div>
+
+  <div class="card">
+    <h3>רשימת שאלות</h3>
+    <div id="manageQuestionList" class="manage-list"></div>
+  </div>
+</section>
+
+<section id="aboutScreen" class="screen">
+  <div class="card">
+    <h2>אודות האפליקציה</h2>
+    <p>אפליקציית <b>דלאשה מערכות הנדסה</b> פותחה כסביבת למידה, תרגול והערכה אינטראקטיבית בנושא תיבה וקובייה. מטרת האפליקציה היא לאפשר לתלמידים ללמוד את מושגי היסוד בצורה ברורה, לתרגל שאלות מדורגות, לקבל משוב מיידי, לזהות טעויות, ולחזור לתיקון ממוקד עד לשיפור ההבנה.</p>
+
+    <p>האפליקציה משלבת חומר לימודי קצר, מבחן אינטראקטיבי, דשבורד ניתוח תוצאות, דוח מורה, תעודת סיום, ייצוא נתונים, ומנגנון ניהול שאלות ושלבים.</p>
+  </div>
+
+  <div class="card">
+    <h2>אודות המפתח</h2>
+    <p>האפליקציה פותחה על ידי <b>עלי דלאשה</b>, איש חינוך וטכנולוגיה, בעל ניסיון רב בהוראה, פיתוח תכניות לימוד, הובלת תהליכים פדגוגיים, שילוב כלים דיגיטליים בחינוך, בניית מערכות למידה אינטראקטיביות, ויישום חשיבה מבוססת נתונים לשיפור תהליכי הוראה, למידה והערכה.</p>
+
+    <p>המערכת מבטאת תפיסה חינוכית המשלבת למידה פעילה, משוב מיידי, אחריות תלמיד על תהליך הלמידה, ויכולת של המורה לקבל תמונת מצב ברורה לצורך קבלת החלטות פדגוגיות.</p>
+
+    <p class="small">עלי דלאשה 2026 © | Dallasha Engineering Systems</p>
+    <button class="btn-primary" onclick="showScreen('loginScreen')">חזרה למסך הראשי</button>
+  </div>
+</section>
+
+<div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+<aside id="sidebar" class="sidebar">
+  <h3>ניווט שאלות</h3>
+  <p class="small">ירוק: נכון | אדום: שגוי | כחול: השאלה הנוכחית</p>
+  <div id="sidebarGroups"></div>
+  <button class="btn-secondary" onclick="closeSidebar()">סגור תפריט</button>
+</aside>
+
+<nav class="bottom-nav no-print">
+  <button onclick="showLearning()">חומר</button>
+  <button onclick="showScreen('quizScreen')">מבחן</button>
+  <button onclick="showDashboard()">ניתוח</button>
+  <button onclick="showTeacherReport()">דוח</button>
+  <button onclick="showManage()">ניהול</button>
+  <button onclick="showAbout()">אודות</button>
+</nav>
+
+<div class="footer-credit">עלי דלאשה 2026 © | כל הזכויות שמורות | Dallasha Engineering Systems</div>
+
+</div>
+
+<script>
+const defaultQuestions = [
+{cat:"מבנה",q:"כמה פאות יש לקובייה?",c:["4","6","8","12"],a:1,h:"חשוב על מספר המשטחים החיצוניים של גוף דמוי קובייה.",e:"לקובייה יש 6 פאות. כל פאה היא ריבוע.",f:"קובייה: 6 פאות, 8 קודקודים, 12 מקצועות"},
+{cat:"מבנה",q:"כמה קודקודים יש לתיבה?",c:["6","8","10","12"],a:1,h:"חשוב על מספר הפינות בגוף דמוי קופסה.",e:"לתיבה יש 8 קודקודים. בכל קודקוד נפגשים שלושה מקצועות.",f:"קודקוד הוא נקודת מפגש של מקצועות"},
+{cat:"מבנה",q:"כמה מקצועות יש לקובייה?",c:["6","8","12","16"],a:2,h:"נסה לספור את הקווים החיצוניים שבהם נפגשות הפאות.",e:"לקובייה יש 12 מקצועות. מקצוע הוא קו מפגש בין שתי פאות.",f:"מקצוע = קו מפגש בין שתי פאות"},
+{cat:"מבנה",q:"מהי פאה בגוף הנדסי?",c:["נקודת מפגש","משטח שטוח","קו חיצוני בלבד","מידת נפח"],a:1,h:"חפש את החלק שניתן להניח עליו את הגוף.",e:"פאה היא משטח שטוח שמרכיב את הגוף.",f:"פאה = משטח"},
+{cat:"מבנה",q:"מהו מקצוע בתיבה?",c:["קו מפגש בין שתי פאות","שטח פנימי","קודקוד בלבד","גובה בלבד"],a:0,h:"התמקד בגבול שבין שני משטחים.",e:"מקצוע הוא הקטע שבו שתי פאות נפגשות.",f:"מקצוע = קו מפגש"},
+{cat:"מבנה",q:"מהו קודקוד?",c:["פאה מרובעת","נקודת מפגש של מקצועות","נפח הגוף","צבע הגוף"],a:1,h:"התמקד באחת הפינות של הגוף.",e:"קודקוד הוא נקודה שבה נפגשים מקצועות.",f:"קודקוד = נקודת מפגש"},
+{cat:"מבנה",q:"איזה גוף מורכב משש פאות מלבניות?",c:["חרוט","גליל","תיבה","כדור"],a:2,h:"חשוב על גוף שנראה כמו קופסה מלבנית.",e:"תיבה מורכבת משש פאות מלבניות.",f:"תיבה = גוף בעל 6 פאות מלבניות"},
+{cat:"מבנה",q:"איזו צורה יש לכל פאה בקובייה?",c:["משולש","עיגול","ריבוע","מחומש"],a:2,h:"בדוק איזו צורה מתקבלת כאשר כל הצלעות של הפאה שוות.",e:"בקובייה כל אחת משש הפאות היא ריבוע.",f:"פאות הקובייה הן ריבועים"},
+{cat:"מבנה",q:"כמה זוגות של פאות נגדיות יש בתיבה?",c:["זוג אחד","שני זוגות","שלושה זוגות","ארבעה זוגות"],a:2,h:"חלק את מספר הפאות הכולל לזוגות של פאות שמול זו את זו.",e:"בתיבה יש שלושה זוגות של פאות נגדיות.",f:"6 פאות = 3 זוגות נגדיים"},
+{cat:"מבנה",q:"מה משותף לתיבה ולקובייה?",c:["לשתיהן 6 פאות, 8 קודקודים ו 12 מקצועות","לשתיהן פאות עגולות","לשתיהן אין נפח","לשתיהן 4 קודקודים"],a:0,h:"השווה בין שני הגופים לפי מספר חלקי המבנה שלהם.",e:"גם לתיבה וגם לקובייה יש 6 פאות, 8 קודקודים ו 12 מקצועות.",f:"תיבה וקובייה הן גופים תלת ממדיים"},
+
+{cat:"תכונות",q:"מה נכון לגבי כל מקצועות הקובייה?",c:["כולם שווים באורכם","כולם שונים","רק ארבעה שווים","אין לקובייה מקצועות"],a:0,h:"חשוב על גוף שבו שלוש המידות קשורות זו לזו בצורה מיוחדת.",e:"בקובייה כל המקצועות שווים באורכם.",f:"קובייה: אורך = רוחב = גובה"},
+{cat:"תכונות",q:"מה נכון לגבי פאות נגדיות בתיבה?",c:["הן תמיד שונות","הן חופפות ושוות","הן תמיד משולשות","הן עגולות"],a:1,h:"התמקד בפאות שנמצאות זו מול זו בגוף דמוי קופסה.",e:"פאות נגדיות בתיבה הן פאות חופפות ושוות.",f:"פאות נגדיות בתיבה שוות זו לזו"},
+{cat:"תכונות",q:"מתי תיבה נקראת קובייה?",c:["כאשר כל המידות שוות","כאשר יש לה 4 פאות","כאשר אין לה גובה","כאשר היא עגולה"],a:0,h:"בדוק מה צריך לקרות לשלוש המידות כדי שהתיבה תהיה מקרה מיוחד.",e:"קובייה היא תיבה מיוחדת שבה האורך, הרוחב והגובה שווים.",f:"קובייה = תיבה שכל מידותיה שוות"},
+{cat:"תכונות",q:"מה נכון לגבי קובייה?",c:["כל פאותיה ריבועים","כל פאותיה משולשים","אין לה קודקודים","יש לה פאה אחת"],a:0,h:"התבונן בצורת הפאות של הגוף ולא במספרן בלבד.",e:"כל פאות הקובייה הן ריבועים חופפים.",f:"פאות הקובייה חופפות"},
+{cat:"תכונות",q:"מה נכון לגבי תיבה רגילה?",c:["ייתכן שהאורך, הרוחב והגובה שונים","כל המידות חייבות להיות שוות","אין לה נפח","אין לה פאות"],a:0,h:"השווה בין תיבה רגילה לבין מקרה מיוחד של תיבה.",e:"בתיבה רגילה האורך, הרוחב והגובה יכולים להיות שונים.",f:"בתיבה: אורך, רוחב וגובה"},
+{cat:"תכונות",q:"מה הקשר בין קובייה לתיבה?",c:["קובייה היא סוג מיוחד של תיבה","תיבה היא עיגול","אין קשר","קובייה אינה גוף"],a:0,h:"חשוב האם אחד הגופים הוא מקרה מיוחד של השני.",e:"כל קובייה היא תיבה, אך לא כל תיבה היא קובייה.",f:"קובייה היא מקרה פרטי של תיבה"},
+{cat:"תכונות",q:"כמה פאות נפגשות בכל קודקוד של תיבה?",c:["2","3","4","6"],a:1,h:"התמקד בפינה אחת של גוף דמוי קופסה ובדוק כמה משטחים נפגשים שם.",e:"בכל קודקוד של תיבה נפגשות שלוש פאות.",f:"בכל קודקוד נפגשות 3 פאות"},
+{cat:"תכונות",q:"מה נכון לגבי מקצועות מקבילים בתיבה?",c:["הם בעלי אותו כיוון ובקבוצות מתאימות גם אותו אורך","הם תמיד נחתכים","הם תמיד עגולים","אין מקצועות מקבילים"],a:0,h:"חשוב על קווים באותו כיוון שאינם נפגשים.",e:"בתיבה קיימים מקצועות מקבילים. בקבוצות מתאימות הם גם שווים באורכם.",f:"מקבילים = אותו כיוון ואינם נפגשים"},
+{cat:"תכונות",q:"איזו טענה נכונה?",c:["לקובייה יש נפח","לקובייה אין שטח פנים","לתיבה אין גובה","לתיבה אין פאות"],a:0,h:"בדוק איזו טענה מתאימה לגוף תלת ממדי.",e:"קובייה היא גוף תלת ממדי ולכן יש לה נפח.",f:"גוף תלת ממדי תופס מקום"},
+{cat:"תכונות",q:"מהי תכונה של תיבה?",c:["יש לה אורך, רוחב וגובה","יש לה רק אורך","היא תמיד שטוחה","אין לה מידות"],a:0,h:"חשוב על ההבדל בין צורה שטוחה לבין גוף במרחב.",e:"תיבה היא גוף תלת ממדי ולכן יש לה אורך, רוחב וגובה.",f:"תלת ממד = אורך, רוחב, גובה"},
+
+{cat:"חישובים",q:"מהי נוסחת נפח תיבה?",c:["אורך + רוחב + גובה","אורך כפול רוחב כפול גובה","6 כפול אורך","שטח פאה אחת"],a:1,h:"נפח קשור לשילוב של שלוש מידות הגוף.",e:"נפח תיבה מחשבים לפי אורך כפול רוחב כפול גובה.",f:"V = אורך × רוחב × גובה"},
+{cat:"חישובים",q:"מה נפח תיבה שאורכה 5, רוחבה 3 וגובהה 2?",c:["10","15","30","60"],a:2,h:"השתמש בשלוש המידות של הגוף כדי לחשב את המקום שהוא תופס.",e:"5 כפול 3 כפול 2 שווה 30.",f:"V = 5 × 3 × 2 = 30"},
+{cat:"חישובים",q:"מה נפח קובייה שאורך המקצוע שלה 4?",c:["12","16","48","64"],a:3,h:"בגוף זה אותה מידה חוזרת בשלושת הכיוונים.",e:"נפח קובייה הוא 4 כפול 4 כפול 4, כלומר 64.",f:"V = a × a × a = 4 × 4 × 4 = 64"},
+{cat:"חישובים",q:"מה שטח פאה אחת בקובייה שאורך מקצועה 5?",c:["10","20","25","125"],a:2,h:"התמקד בפאה אחת בלבד וחשב שטח של צורה מרובעת.",e:"פאה של קובייה היא ריבוע. שטח ריבוע הוא צלע כפול צלע.",f:"S = 5 × 5 = 25"},
+{cat:"חישובים",q:"מה שטח הפנים של קובייה שאורך מקצועה 3?",c:["9","18","36","54"],a:3,h:"חשב תחילה פאה אחת ואז התייחס לכל הפאות.",e:"שטח פאה אחת הוא 9. יש 6 פאות, לכן 54.",f:"6 × 3 × 3 = 54"},
+{cat:"חישובים",q:"מה נפח תיבה במידות 10, 2, 3?",c:["15","30","60","120"],a:2,h:"התייחס לכל אחת משלוש המידות של הגוף.",e:"10 כפול 2 כפול 3 שווה 60.",f:"V = 10 × 2 × 3 = 60"},
+{cat:"חישובים",q:"מהי יחידת מידה מתאימה לנפח?",c:["סנטימטר","סנטימטר מרובע","סנטימטר מעוקב","מעלות"],a:2,h:"חשוב על יחידה שמתארת מקום במרחב ולא רק אורך או שטח.",e:"נפח נמדד ביחידות מעוקבות כגון סמ״ק.",f:"נפח = יחידות מעוקבות"},
+{cat:"חישובים",q:"מהי יחידת מידה מתאימה לשטח פנים?",c:["סמ״ר","סמ״ק","קילוגרם","ליטר בלבד"],a:0,h:"חשוב על יחידה שמתארת מעטפת ולא מקום פנימי.",e:"שטח נמדד ביחידות ריבועיות כגון סמ״ר.",f:"שטח = יחידות ריבועיות"},
+{cat:"חישובים",q:"אם נפח תיבה הוא 24, אורך 4 ורוחב 3, מה הגובה?",c:["1","2","3","4"],a:1,h:"מצא תחילה את שטח הבסיס ואז בדוק כמה פעמים הוא נכנס בנפח.",e:"4 כפול 3 שווה 12. 24 חלקי 12 שווה 2.",f:"גובה = נפח ÷ אורך ÷ רוחב"},
+{cat:"חישובים",q:"מה שטח הפנים של קובייה שאורך מקצועה 2?",c:["8","12","16","24"],a:3,h:"חשב מעטפת של גוף שיש לו שש פאות שוות.",e:"שטח פאה אחת הוא 4. כפול 6 פאות שווה 24.",f:"6 × 2 × 2 = 24"},
+
+{cat:"אתגרים",q:"איזו תיבה בעלת נפח גדול יותר: 2×3×4 או 3×3×3?",c:["2×3×4","3×3×3","שתיהן שוות","אי אפשר לדעת"],a:1,h:"חשב את הנפח של כל גוף בנפרד ואז השווה ביניהם.",e:"2 כפול 3 כפול 4 שווה 24, ואילו 3 כפול 3 כפול 3 שווה 27.",f:"24 לעומת 27"},
+{cat:"אתגרים",q:"אם מגדילים פי 2 את אורך מקצוע הקובייה, פי כמה גדל הנפח?",c:["פי 2","פי 4","פי 6","פי 8"],a:3,h:"בדוק כיצד שינוי בכל אחת משלוש המידות משפיע על המקום שהגוף תופס.",e:"הנפח תלוי בשלוש מידות. הכפלה פי 2 בכל מידה מגדילה את הנפח פי 8.",f:"2 × 2 × 2 = 8"},
+{cat:"אתגרים",q:"איזו טענה נכונה תמיד?",c:["כל תיבה היא קובייה","כל קובייה היא תיבה","כל גליל הוא קובייה","כל חרוט הוא תיבה"],a:1,h:"חשוב איזה גוף הוא מקרה מיוחד בתוך משפחה רחבה יותר.",e:"קובייה היא מקרה מיוחד של תיבה.",f:"כל קובייה היא תיבה"},
+{cat:"אתגרים",q:"לתיבה יש נפח 60, אורך 5 וגובה 4. מה הרוחב?",c:["2","3","4","5"],a:1,h:"השתמש בנפח ובשתי מידות ידועות כדי למצוא את המידה החסרה.",e:"5 כפול 4 שווה 20. 60 חלקי 20 שווה 3.",f:"רוחב = 60 ÷ 5 ÷ 4 = 3"},
+{cat:"אתגרים",q:"מה קורה לשטח הפנים של קובייה כאשר אורך המקצוע גדל?",c:["הוא קטן","הוא נשאר קבוע","הוא גדל","הוא נעלם"],a:2,h:"חשוב מה קורה לכל פאה כאשר הגוף כולו נעשה גדול יותר.",e:"כאשר המקצוע גדל, שטח כל פאה גדל ולכן גם שטח הפנים גדל.",f:"שטח פנים תלוי באורך המקצוע"},
+{cat:"אתגרים",q:"איזה נתון חסר כדי לחשב נפח תיבה אם ידועים אורך ורוחב בלבד?",c:["צבע","גובה","מספר קודקודים","מספר פאות"],a:1,h:"בדוק איזו מידה שלישית דרושה כדי לתאר גוף במרחב.",e:"כדי לחשב נפח תיבה צריך אורך, רוחב וגובה.",f:"V = אורך × רוחב × גובה"},
+{cat:"אתגרים",q:"תיבה וקובייה בעלות אותו נפח. מה אפשר להסיק בוודאות?",c:["שהן אותו גוף בדיוק","שהן תופסות אותו מקום במרחב","שיש להן אותו שטח פנים","שכל המקצועות שווים"],a:1,h:"הבחן בין כמות המקום שהגוף תופס לבין הצורה המדויקת שלו.",e:"נפח שווה אומר שהן תופסות אותה כמות מקום, אך הצורה והמידות לא בהכרח זהות.",f:"נפח שווה אינו מחייב צורה זהה"},
+{cat:"אתגרים",q:"אם שטח פאה בקובייה הוא 49, מה אורך המקצוע?",c:["6","7","8","9"],a:1,h:"חפש מספר שכאשר מכפילים אותו בעצמו מתקבל שטח הפאה.",e:"פאה היא ריבוע. אם שטחה 49, אורך הצלע הוא 7.",f:"7 × 7 = 49"},
+{cat:"אתגרים",q:"מה עדיף למדידת קופסה מלאה באוויר: שטח פנים או נפח?",c:["שטח פנים","נפח","מספר קודקודים","צבע הקופסה"],a:1,h:"חשוב האם מודדים מעטפת חיצונית או מקום פנימי.",e:"כמות המקום בתוך הקופסה נמדדת לפי נפח.",f:"נפח מודד מקום פנימי"},
+{cat:"אתגרים",q:"מהו ההבדל המרכזי בין שטח פנים לנפח?",c:["שטח פנים מודד מעטפת, נפח מודד מקום במרחב","שניהם אותו דבר","נפח מודד צבע","שטח פנים מודד משקל"],a:0,h:"השווה בין מה שנמצא מבחוץ לבין המקום שהגוף תופס.",e:"שטח פנים מתאר את המעטפת החיצונית. נפח מתאר את המקום שהגוף תופס.",f:"שטח פנים = מעטפת | נפח = מקום"}
+];
+
+let questions = [];
+let current = 0;
+let answers = [];
+let firstAttempt = [];
+let correctionMode = false;
+let correctionList = [];
+let student = {name:"", className:""};
+let started = false;
+let activityMode = "practice";
+let previewMode = false;
+
+function byId(id){
+  return document.getElementById(id);
+}
+
+function cloneDefault(){
+  return JSON.parse(JSON.stringify(defaultQuestions));
+}
+
+function loadQuestionBank(){
+  const saved = localStorage.getItem("dallashaQuestionBankV3");
+  if(saved){
+    try{
+      questions = JSON.parse(saved);
+      if(!Array.isArray(questions) || questions.length === 0){
+        questions = cloneDefault();
+      }
+    }catch(e){
+      questions = cloneDefault();
+    }
+  }else{
+    questions = cloneDefault();
+  }
+  ensureAnswerArrays();
+}
+
+function saveQuestionBank(){
+  localStorage.setItem("dallashaQuestionBankV3", JSON.stringify(questions));
+}
+
+function ensureAnswerArrays(){
+  answers = Array(questions.length).fill(null);
+  firstAttempt = Array(questions.length).fill(null);
+}
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(function(s){
+    s.classList.remove("active");
+  });
+  byId(id).classList.add("active");
+
+  if(id === "quizScreen") renderQuestion();
+  if(id === "dashboardScreen") renderDashboard();
+  if(id === "certificateScreen") renderCertificate();
+  if(id === "teacherReportScreen") renderTeacherReport();
+  if(id === "manageScreen") renderManage();
+}
+
+function showLearning(){
+  showScreen("learningScreen");
+}
+
+function showAbout(){
+  showScreen("aboutScreen");
+}
+
+function showManage(){
+  showScreen("manageScreen");
+}
+
+function saveState(){
+  const state = {
+    current, answers, firstAttempt, correctionMode, correctionList,
+    student, started, activityMode, previewMode
+  };
+  localStorage.setItem("dallashaEngineeringStateV3", JSON.stringify(state));
+}
+
+function loadState(){
+  const raw = localStorage.getItem("dallashaEngineeringStateV3");
+  if(!raw) return false;
+
+  try{
+    const s = JSON.parse(raw);
+    current = typeof s.current === "number" ? s.current : 0;
+    answers = Array.isArray(s.answers) && s.answers.length === questions.length ? s.answers : Array(questions.length).fill(null);
+    firstAttempt = Array.isArray(s.firstAttempt) && s.firstAttempt.length === questions.length ? s.firstAttempt : Array(questions.length).fill(null);
+    correctionMode = !!s.correctionMode;
+    correctionList = Array.isArray(s.correctionList) ? s.correctionList : [];
+    student = s.student || {name:"", className:""};
+    started = !!s.started;
+    activityMode = s.activityMode || "practice";
+    previewMode = !!s.previewMode;
+
+    byId("studentName").value = student.name || "";
+    byId("studentClass").value = student.className || "";
+    byId("activityMode").value = activityMode;
+    return true;
+  }catch(e){
+    return false;
+  }
+}
+
+function startApp(){
+  const name = byId("studentName").value.trim();
+  const className = byId("studentClass").value.trim();
+
+  if(!name || !className){
+    alert("נא להזין שם מלא וכיתה לפני התחלת הפעילות.");
+    return;
+  }
+
+  student = {name, className};
+  activityMode = byId("activityMode").value;
+  started = true;
+  previewMode = false;
+  correctionMode = false;
+  correctionList = [];
+
+  saveState();
+  showScreen("quizScreen");
+}
+
+function setModeAndStart(mode){
+  byId("activityMode").value = mode;
+  activityMode = mode;
+  startApp();
+}
+
+function teacherPreview(){
+  student = {name:"תלמיד דמו", className:"כיתה דמו"};
+  activityMode = "practice";
+  previewMode = true;
+  started = true;
+  current = 0;
+  correctionMode = false;
+  correctionList = [];
+  answers = Array(questions.length).fill(null);
+  firstAttempt = Array(questions.length).fill(null);
+
+  for(let i = 0; i < questions.length; i++){
+    if(i % 5 === 0){
+      answers[i] = questions[i].a === 0 ? 1 : 0;
+    }else{
+      answers[i] = questions[i].a;
+    }
+    firstAttempt[i] = answers[i];
+  }
+
+  byId("studentName").value = student.name;
+  byId("studentClass").value = student.className;
+  byId("activityMode").value = "practice";
+
+  saveState();
+  showDashboard();
+}
+
+function getCurrentIndex(){
+  if(correctionMode){
+    return correctionList[current] ?? 0;
+  }
+  return current;
+}
+
+function renderQuestion(){
+  if(!started){
+    showScreen("loginScreen");
+    return;
+  }
+
+  if(questions.length === 0){
+    alert("אין שאלות במאגר. עבור למסך ניהול והוסף שאלות.");
+    showManage();
+    return;
+  }
+
+  if(current >= questions.length) current = questions.length - 1;
+
+  const realIndex = getCurrentIndex();
+  const q = questions[realIndex];
+
+  byId("studentMini").innerText = student.name + " | " + student.className;
+  byId("modeMini").innerText = getModeName();
+  byId("questionMeta").innerText = "שאלה " + (realIndex + 1) + " מתוך " + questions.length + " | " + q.cat;
+
+  const answeredCount = answers.filter(x => x !== null).length;
+  byId("answeredMeta").innerText = "נענו: " + answeredCount + "/" + questions.length;
+  byId("mainProgress").style.width = Math.round(((realIndex + 1) / questions.length) * 100) + "%";
+
+  byId("questionTitle").innerText = q.q;
+  byId("formulaBox").innerText = q.f || "";
+
+  byId("hintBox").className = "hint-box";
+  byId("hintBox").innerText = q.h || "חשוב על המושג המרכזי בשאלה והשווה אותו לחומר הלימודי.";
+
+  byId("hintBtn").style.display = activityMode === "practice" ? "block" : "none";
+
+  const box = byId("choicesBox");
+  box.innerHTML = "";
+
+  q.c.forEach(function(choice, i){
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerText = choice;
+
+    btn.onclick = function(){
+      selectAnswer(realIndex, i);
+    };
+
+    if(answers[realIndex] !== null){
+      btn.classList.add("locked");
+
+      if(activityMode === "practice" || correctionMode || previewMode){
+        if(i === q.a) btn.classList.add("correct");
+        if(i === answers[realIndex] && i !== q.a) btn.classList.add("wrong");
+      }else{
+        if(i === answers[realIndex]){
+          btn.style.borderColor = "var(--primary)";
+          btn.style.background = "#eef2ff";
+        }
+      }
+    }
+
+    box.appendChild(btn);
+  });
+
+  renderFeedback(realIndex);
+  buildQuestionNav();
+}
+
+function getModeName(){
+  if(previewMode) return "תצוגה מקדימה למורה";
+  if(correctionMode) return "מצב תיקון טעויות";
+  if(activityMode === "practice") return "מצב תרגול";
+  return "מצב מבחן";
+}
+
+function showHint(){
+  byId("hintBox").classList.add("show");
+}
+
+function selectAnswer(index, selected){
+  if(answers[index] !== null) return;
+  answers[index] = selected;
+  if(firstAttempt[index] === null) firstAttempt[index] = selected;
+  saveState();
+  renderQuestion();
+}
+
+function renderFeedback(index){
+  const fb = byId("feedbackBox");
+  const q = questions[index];
+  fb.className = "feedback";
+  fb.innerHTML = "";
+
+  if(answers[index] === null) return;
+
+  if(activityMode === "test" && !correctionMode && !previewMode){
+    fb.classList.add("show","good");
+    fb.innerText = "התשובה נשמרה. המשך לשאלה הבאה.";
+    return;
+  }
+
+  const ok = answers[index] === q.a;
+  fb.classList.add("show", ok ? "good" : "bad");
+  fb.innerText = (ok ? "נכון מאוד. " : "לא נכון. ") + "התשובה הנכונה: " + q.c[q.a] + ". הסבר מומחה: " + q.e;
+}
+
+function nextQuestion(){
+  if(!started){
+    showScreen("loginScreen");
+    return;
+  }
+
+  const realIndex = getCurrentIndex();
+
+  if(answers[realIndex] === null){
+    alert("לא ניתן להתקדם לפני בחירת תשובה.");
+    return;
+  }
+
+  if(correctionMode){
+    if(current < correctionList.length - 1){
+      current++;
+      saveState();
+      renderQuestion();
+    }else{
+      correctionMode = false;
+      correctionList = [];
+      current = Math.min(realIndex + 1, questions.length - 1);
+      saveState();
+      showDashboard();
+    }
+    return;
+  }
+
+  if(current < questions.length - 1){
+    current++;
+    saveState();
+    renderQuestion();
+  }else{
+    showDashboard();
+  }
+}
+
+function prevQuestion(){
+  if(current > 0){
+    current--;
+    saveState();
+    renderQuestion();
+  }
+}
+
+function goToQuestion(index){
+  if(!started){
+    alert("נא להתחיל את הפעילות ממסך הכניסה.");
+    showScreen("loginScreen");
+    return;
+  }
+
+  correctionMode = false;
+  correctionList = [];
+  current = index;
+  saveState();
+  closeSidebar();
+  showScreen("quizScreen");
+}
+
+function showDashboard(){
+  if(!started){
+    alert("נא להתחיל את הפעילות ממסך הכניסה.");
+    showScreen("loginScreen");
+    return;
+  }
+  showScreen("dashboardScreen");
+}
+
+function calculateStats(){
+  let correct = 0, answered = 0, wrong = 0;
+  const category = {};
+
+  questions.forEach(function(q,i){
+    if(!category[q.cat]) category[q.cat] = {total:0, correct:0, answered:0, wrong:0};
+    category[q.cat].total++;
+
+    if(answers[i] !== null){
+      answered++;
+      category[q.cat].answered++;
+      if(answers[i] === q.a){
+        correct++;
+        category[q.cat].correct++;
+      }else{
+        wrong++;
+        category[q.cat].wrong++;
+      }
+    }
+  });
+
+  const percent = questions.length ? Math.round((correct / questions.length) * 100) : 0;
+  return {correct, wrong, answered, percent, category};
+}
+
+function renderDashboard(){
+  const stats = calculateStats();
+
+  byId("studentInfo").innerText = "שם: " + student.name + " | כיתה: " + student.className + " | מצב: " + getModeName();
+  byId("scorePercent").innerText = stats.percent + "%";
+  byId("correctCount").innerText = stats.correct;
+  byId("wrongCount").innerText = stats.wrong;
+  byId("answeredCount").innerText = stats.answered;
+
+  renderCategoryAnalysis(stats.category);
+  byId("expertInsight").innerText = makeInsight(stats.percent, stats.answered);
+  byId("weakAreaBox").innerText = makeWeakAreaText(stats.category);
+}
+
+function renderCategoryAnalysis(category){
+  const div = byId("categoryAnalysis");
+  div.innerHTML = "";
+
+  Object.keys(category).forEach(function(cat){
+    const data = category[cat];
+    const pct = data.total ? Math.round((data.correct / data.total) * 100) : 0;
+
+    const item = document.createElement("div");
+    item.className = "category-item";
+    item.innerHTML =
+      "<div class='category-title'><span>" + cat + "</span><span>" + pct + "%</span></div>" +
+      "<div class='progress-wrap'><div class='progress-bar' style='width:" + pct + "%'></div></div>" +
+      "<div class='small'>" + data.correct + " נכונות מתוך " + data.total + " שאלות | טעויות: " + data.wrong + "</div>";
+    div.appendChild(item);
+  });
+}
+
+function makeInsight(percent, answered){
+  if(answered < questions.length) return "הפעילות עדיין לא הושלמה. ניתן להמשיך לענות על השאלות ולאחר מכן לקבל ניתוח מלא.";
+  if(percent >= 90) return "שליטה גבוהה מאוד בנושא התיבה והקובייה.";
+  if(percent >= 75) return "ביצוע טוב. מומלץ לבצע תיקון טעויות כדי להגיע לשליטה מלאה.";
+  if(percent >= 50) return "קיימת הבנה בסיסית, אך נדרש חיזוק ממוקד.";
+  return "נדרש תרגול חוזר של מושגי היסוד.";
+}
+
+function makeWeakAreaText(category){
+  let weakest = null;
+
+  Object.keys(category).forEach(function(cat){
+    const data = category[cat];
+    const pct = data.total ? Math.round((data.correct / data.total) * 100) : 0;
+    if(!weakest || pct < weakest.pct) weakest = {cat,pct};
+  });
+
+  if(!weakest) return "עדיין אין מספיק נתונים לניתוח.";
+  return "הנושא שדורש את החיזוק המשמעותי ביותר כרגע: " + weakest.cat + " | אחוז הצלחה: " + weakest.pct + "%.";
+}
+
+function startCorrection(){
+  correctionList = [];
+  answers.forEach(function(ans,i){
+    if(ans !== null && ans !== questions[i].a) correctionList.push(i);
+  });
+
+  if(correctionList.length === 0){
+    alert("אין טעויות לתיקון. כל הכבוד.");
+    return;
+  }
+
+  correctionList.forEach(i => answers[i] = null);
+  correctionMode = true;
+  activityMode = "practice";
+  current = 0;
+  saveState();
+  showScreen("quizScreen");
+}
+
+function showTeacherReport(){
+  if(!started){
+    alert("נא להתחיל את הפעילות ממסך הכניסה.");
+    return showScreen("loginScreen");
+  }
+  showScreen("teacherReportScreen");
+}
+
+function renderTeacherReport(){
+  const stats = calculateStats();
+  const date = new Date().toLocaleDateString("he-IL");
+  let wrongList = [];
+
+  answers.forEach(function(ans,i){
+    if(ans !== null && ans !== questions[i].a){
+      wrongList.push("שאלה " + (i+1) + " | " + questions[i].cat + " | תשובת תלמיד: " + questions[i].c[ans] + " | תשובה נכונה: " + questions[i].c[questions[i].a]);
+    }
+  });
+
+  if(wrongList.length === 0) wrongList.push("לא נמצאו טעויות בשאלות שנענו.");
+
+  byId("teacherReport").innerHTML =
+    "<div class='report-line'><b>תאריך:</b> " + date + "</div>" +
+    "<div class='report-line'><b>שם תלמיד:</b> " + student.name + "</div>" +
+    "<div class='report-line'><b>כיתה:</b> " + student.className + "</div>" +
+    "<div class='report-line'><b>מצב פעילות:</b> " + getModeName() + "</div>" +
+    "<div class='report-line'><b>ציון:</b> " + stats.percent + "%</div>" +
+    "<div class='report-line'><b>תשובות נכונות:</b> " + stats.correct + " מתוך " + questions.length + "</div>" +
+    "<div class='report-line'><b>טעויות:</b> " + stats.wrong + "</div>" +
+    "<div class='report-line'><b>המלצה פדגוגית:</b> " + makeWeakAreaText(stats.category) + "</div>" +
+    "<div class='report-line'><b>רשימת טעויות:</b><br>" + wrongList.join("<br>") + "</div>" +
+    "<div class='report-line'><b>זכויות יוצרים:</b> עלי דלאשה 2026 © | Dallasha Engineering Systems</div>";
+}
+
+function exportCSV(){
+  if(!started){
+    alert("אין נתונים לייצוא.");
+    return;
+  }
+
+  const stats = calculateStats();
+  const rows = [];
+  rows.push(["תאריך","שם תלמיד","כיתה","מצב","ציון","נכונות","טעויות","שאלה","שלב","תשובת תלמיד","תשובה נכונה","סטטוס"]);
+  const date = new Date().toLocaleDateString("he-IL");
+
+  questions.forEach(function(q,i){
+    const ans = answers[i];
+    rows.push([
+      date,
+      student.name,
+      student.className,
+      getModeName(),
+      stats.percent + "%",
+      stats.correct,
+      stats.wrong,
+      i+1,
+      q.cat,
+      ans === null ? "לא נענה" : q.c[ans],
+      q.c[q.a],
+      ans === null ? "לא נענה" : (ans === q.a ? "נכון" : "שגוי")
+    ]);
+  });
+
+  const csv = rows.map(row => row.map(cell => '"' + String(cell).replace(/"/g,'""') + '"').join(",")).join("\n");
+  const blob = new Blob(["\ufeff" + csv], {type:"text/csv;charset=utf-8;"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "dallasha_engineering_report.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function showCertificate(){
+  if(!started) return showScreen("loginScreen");
+  showScreen("certificateScreen");
+}
+
+function renderCertificate(){
+  const stats = calculateStats();
+  byId("certName").innerText = student.name || "";
+  byId("certClass").innerText = "כיתה: " + (student.className || "");
+  byId("certScore").innerText = "ציון סופי: " + stats.percent + "% | " + stats.correct + " תשובות נכונות מתוך " + questions.length;
+  byId("certLevel").innerText = "רמת שליטה: " + getLevel(stats.percent);
+  byId("certDate").innerText = "תאריך: " + new Date().toLocaleDateString("he-IL");
+
+  let msg = "השתתפות חשובה בתהליך הלמידה.";
+  if(stats.percent >= 90) msg = "הישג מצוין ושליטה גבוהה בנושא התיבה והקובייה.";
+  else if(stats.percent >= 75) msg = "הישג טוב מאוד. המשך תרגול יביא לשליטה מלאה.";
+  else if(stats.percent >= 50) msg = "התקדמות יפה. מומלץ להמשיך לתרגל ולתקן טעויות.";
+
+  byId("certMessage").innerText = msg;
+}
+
+function getLevel(percent){
+  if(percent >= 90) return "מומחה";
+  if(percent >= 75) return "מתקדם";
+  if(percent >= 50) return "בסיסי";
+  return "בתהליך למידה";
+}
+
+function openSidebar(){
+  buildQuestionNav();
+  byId("sidebar").classList.add("open");
+  byId("overlay").classList.add("show");
+}
+
+function closeSidebar(){
+  byId("sidebar").classList.remove("open");
+  byId("overlay").classList.remove("show");
+}
+
+function buildQuestionNav(){
+  const wrap = byId("sidebarGroups");
+  wrap.innerHTML = "";
+
+  const groups = {};
+  questions.forEach(q => { if(!groups[q.cat]) groups[q.cat] = []; });
+  questions.forEach((q,i) => groups[q.cat].push(i));
+
+  Object.keys(groups).forEach(function(cat){
+    const title = document.createElement("div");
+    title.className = "section-label";
+    title.innerText = cat;
+    wrap.appendChild(title);
+
+    const nav = document.createElement("div");
+    nav.className = "qnav";
+
+    groups[cat].forEach(function(i){
+      const btn = document.createElement("button");
+      btn.innerText = i+1;
+      const realCurrent = getCurrentIndex();
+
+      if(i === realCurrent) btn.className = "current";
+      else if(answers[i] === null) btn.className = "empty";
+      else if(answers[i] === questions[i].a) btn.className = "done";
+      else btn.className = "bad";
+
+      btn.onclick = function(){ goToQuestion(i); };
+      nav.appendChild(btn);
+    });
+
+    wrap.appendChild(nav);
+  });
+}
+
+function renderManage(){
+  renderStageOptions();
+  renderQuestionSelect();
+  renderQuestionList();
+}
+
+function getStages(){
+  return [...new Set(questions.map(q => q.cat))];
+}
+
+function renderStageOptions(){
+  const stages = getStages();
+  const qCat = byId("questionCategory");
+  const stageSelect = byId("stageSelect");
+  qCat.innerHTML = "";
+  stageSelect.innerHTML = "";
+
+  stages.forEach(function(stage){
+    const o1 = document.createElement("option");
+    o1.value = stage;
+    o1.textContent = stage;
+    qCat.appendChild(o1);
+
+    const o2 = document.createElement("option");
+    o2.value = stage;
+    o2.textContent = stage;
+    stageSelect.appendChild(o2);
+  });
+}
+
+function renderQuestionSelect(){
+  const sel = byId("editQuestionSelect");
+  sel.innerHTML = "";
+  questions.forEach(function(q,i){
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = (i+1) + " | " + q.cat + " | " + q.q.slice(0,45);
+    sel.appendChild(opt);
+  });
+}
+
+function renderQuestionList(){
+  const list = byId("manageQuestionList");
+  list.innerHTML = "";
+
+  questions.forEach(function(q,i){
+    const item = document.createElement("div");
+    item.className = "manage-item";
+    item.innerHTML = "<b>" + (i+1) + " | " + q.cat + "</b><br>" + q.q;
+    list.appendChild(item);
+  });
+}
+
+function loadQuestionToForm(){
+  const idx = Number(byId("editQuestionSelect").value);
+  const q = questions[idx];
+  if(!q) return;
+
+  byId("questionCategory").value = q.cat;
+  byId("manageQuestionText").value = q.q;
+  byId("choice0").value = q.c[0] || "";
+  byId("choice1").value = q.c[1] || "";
+  byId("choice2").value = q.c[2] || "";
+  byId("choice3").value = q.c[3] || "";
+  byId("correctAnswer").value = q.a;
+  byId("questionHint").value = q.h || "";
+  byId("questionExplain").value = q.e || "";
+  byId("questionFormula").value = q.f || "";
+}
+
+function readQuestionForm(){
+  return {
+    cat: byId("questionCategory").value,
+    q: byId("manageQuestionText").value.trim(),
+    c: [
+      byId("choice0").value.trim(),
+      byId("choice1").value.trim(),
+      byId("choice2").value.trim(),
+      byId("choice3").value.trim()
+    ],
+    a: Number(byId("correctAnswer").value),
+    h: byId("questionHint").value.trim(),
+    e: byId("questionExplain").value.trim(),
+    f: byId("questionFormula").value.trim()
+  };
+}
+
+function validateQuestion(q){
+  if(!q.cat || !q.q || q.c.some(x => !x) || !q.e){
+    alert("נא למלא שלב, שאלה, ארבע תשובות והסבר מומחה.");
+    return false;
+  }
+  return true;
+}
+
+function addQuestion(){
+  const q = readQuestionForm();
+  if(!validateQuestion(q)) return;
+
+  questions.push(q);
+  answers.push(null);
+  firstAttempt.push(null);
+  saveQuestionBank();
+  saveState();
+  renderManage();
+  alert("השאלה נוספה בהצלחה.");
+}
+
+function updateQuestion(){
+  const idx = Number(byId("editQuestionSelect").value);
+  if(isNaN(idx) || !questions[idx]){
+    alert("נא לבחור שאלה לעריכה.");
+    return;
+  }
+
+  const q = readQuestionForm();
+  if(!validateQuestion(q)) return;
+
+  questions[idx] = q;
+  saveQuestionBank();
+  saveState();
+  renderManage();
+  alert("השאלה עודכנה בהצלחה.");
+}
+
+function deleteQuestion(){
+  const idx = Number(byId("editQuestionSelect").value);
+  if(isNaN(idx) || !questions[idx]) return;
+
+  if(!confirm("האם למחוק את השאלה הנבחרת?")) return;
+
+  questions.splice(idx,1);
+  answers.splice(idx,1);
+  firstAttempt.splice(idx,1);
+  if(current >= questions.length) current = Math.max(0,questions.length-1);
+
+  saveQuestionBank();
+  saveState();
+  renderManage();
+}
+
+function addStage(){
+  const name = byId("stageName").value.trim();
+  if(!name){
+    alert("נא להזין שם שלב.");
+    return;
+  }
+  if(getStages().includes(name)){
+    alert("השלב כבר קיים.");
+    return;
+  }
+
+  const sample = {
+    cat:name,
+    q:"שאלה לדוגמה לשלב " + name,
+    c:["אפשרות 1","אפשרות 2","אפשרות 3","אפשרות 4"],
+    a:0,
+    h:"כתוב כאן רמז מכוון בלבד.",
+    e:"כתוב כאן הסבר מומחה.",
+    f:"כלל או נוסחה לפי הצורך"
+  };
+
+  questions.push(sample);
+  answers.push(null);
+  firstAttempt.push(null);
+  saveQuestionBank();
+  saveState();
+  renderManage();
+  alert("השלב נוסף עם שאלת דוגמה. ניתן לערוך אותה כעת.");
+}
+
+function renameStage(){
+  const oldName = byId("stageSelect").value;
+  const newName = byId("stageName").value.trim();
+
+  if(!oldName || !newName){
+    alert("נא לבחור שלב ולהזין שם חדש.");
+    return;
+  }
+
+  questions.forEach(q => {
+    if(q.cat === oldName) q.cat = newName;
+  });
+
+  saveQuestionBank();
+  saveState();
+  renderManage();
+  alert("שם השלב עודכן.");
+}
+
+function deleteStage(){
+  const stage = byId("stageSelect").value;
+  if(!stage) return;
+
+  const count = questions.filter(q => q.cat === stage).length;
+  if(!confirm("בשלב זה קיימות " + count + " שאלות. האם למחוק את כולן?")) return;
+
+  questions = questions.filter(q => q.cat !== stage);
+  ensureAnswerArrays();
+  saveQuestionBank();
+  saveState();
+  renderManage();
+}
+
+function resetQuestionBank(){
+  if(!confirm("האם לאפס את מאגר השאלות לברירת המחדל? כל העריכות יימחקו.")) return;
+
+  questions = cloneDefault();
+  ensureAnswerArrays();
+  current = 0;
+  saveQuestionBank();
+  saveState();
+  renderManage();
+  alert("מאגר השאלות אופס בהצלחה.");
+}
+
+function resetAll(){
+  if(!confirm("האם לאפס את כל נתוני התלמיד ולהתחיל מחדש?")) return;
+
+  localStorage.removeItem("dallashaEngineeringStateV3");
+  current = 0;
+  answers = Array(questions.length).fill(null);
+  firstAttempt = Array(questions.length).fill(null);
+  correctionMode = false;
+  correctionList = [];
+  student = {name:"", className:""};
+  started = false;
+  activityMode = "practice";
+  previewMode = false;
+
+  byId("studentName").value = "";
+  byId("studentClass").value = "";
+  byId("activityMode").value = "practice";
+
+  showScreen("loginScreen");
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  loadQuestionBank();
+  loadState();
+  buildQuestionNav();
+});
+</script>
+
+</body>
+</html>
